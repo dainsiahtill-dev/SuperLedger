@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="data:,">
+  <title>Super Ledger · 工作包对账台</title>
+  <link rel="stylesheet" href="app.css?v=execution-20261114">
+  <script src="config.js" defer></script>
+  <script src="workbench-data.js?v=execution-20261114" defer></script>
+  <script src="app.js?v=execution-20261114" defer></script>
+</head>
+<body>
+  <a class="skip" href="#task-list">跳到任务列表</a>
+  <header class="top">
+    <div><h1>Super Ledger · 工作包对账台</h1><p>独立项目 · 交付、证据与独立审核</p></div>
+    <div class="actions"><button id="refresh" type="button">刷新状态</button><button id="diagnostic" type="button" class="quiet">复制诊断</button><a href="README.md">使用说明</a></div>
+  </header>
+  <div id="connection" class="connection" role="status" aria-live="polite">正在连接本地服务；暂未取得有效视图。</div>
+  <main>
+    <section class="overview" aria-label="多维进度">
+      <div class="section-title"><h2>任务进展</h2><span id="total-label">总数待核对</span></div>
+      <div id="progress" class="progress-empty">读取经过核对的交付、合入、实测与完成记录…</div>
+      <p class="explain">各阶段按任务去重，允许重叠；有限实测不等于原版一致，也不替代原合同逐句验收。</p>
+    </section>
+    <div class="workspace">
+      <aside class="packages" aria-label="工作包目录"><h2>工作包</h2><button id="all-packages" type="button" aria-pressed="true">全部工作包</button><div id="packages"></div><p class="explain">维护单独计数，不计入项目任务。</p></aside>
+      <section class="queue" aria-labelledby="queue-title">
+        <div class="section-title"><h2 id="queue-title">任务队列</h2><span id="queue-count">等待数据</span></div>
+        <div id="execution-overview" class="execution-overview" aria-label="本轮执行组织"></div>
+        <nav id="views" class="views" aria-label="任务视图"></nav>
+        <div class="filters">
+          <label>执行阶段<select id="focus-filter"><option value="all">全部阶段</option></select></label>
+          <label class="search">搜索任务或执行者<input id="search" type="search" placeholder="任务编号、名称、owner" autocomplete="off"></label>
+          <label>工作包<select id="package-filter"><option value="">全部工作包</option></select></label>
+          <label>执行者<input id="owner-filter" type="search" placeholder="筛选 owner" autocomplete="off"></label>
+        </div>
+        <div id="task-list" class="task-list" tabindex="-1"></div>
+        <div id="pagination" class="pagination"></div>
+      </section>
+      <section id="detail" class="detail" aria-labelledby="detail-title" aria-busy="false"><h2 id="detail-title">选择任务，核对交付包</h2><p class="explain">从待接手队列进入，可依次查看当前报告、继承交付、候选与发布、原验收句和操作命令。</p></section>
+    </div>
+  </main>
+  <footer id="freshness">快照生成、审计和最后读取时间将在连接后显示。</footer>
+  <dialog id="image-dialog" aria-labelledby="image-caption"><div class="dialog-bar"><h2 id="image-caption">证据图片</h2><button id="close-image" type="button" autofocus>关闭图片</button></div><div id="image-content"></div><p>图片是证据的一部分；单张截图不代表整条任务通过。</p></dialog>
+  <noscript>本地对账台需要 JavaScript。可用正式 CLI 查询台账；页面不会修改任务状态。</noscript>
+</body>
+</html>

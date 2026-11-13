@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+const require=createRequire(import.meta.url);
+globalThis.WorkbenchConfig={projectId:'other',commandPrefix:['python','-m','super_ledger','--project','C:/any'],phases:[{id:'decode'}]};
+const D=require('../src/super_ledger/static/workbench-data.js');
+assert.equal(D.decodeSelection('#FORMAT/parse_header'),'FORMAT/parse_header');
+assert.equal(D.decodeSelection('#FORMAT/../registry'),'');
+assert.equal(D.publicPath('ledger-work/FORMAT/parse_header/attempts/abc/report.md'),'/api/evidence/ledger-work/FORMAT/parse_header/attempts/abc/report.md');
+assert.equal(D.publicPath('.super-ledger/registry.json'),null);
+assert.equal(D.publicPath('ledger-work/../registry.json'),null);
+assert.equal(D.workPhase({executionPlan:{workstream:{phase:'decode'}}}),'decode');
+globalThis.fetch=async()=>({ok:true,json:async()=>({schema:'super-ledger/identity@1',readOnly:true,admissionEvaluated:false,writeAuthorized:false,packageId:'FORMAT',taskId:'parse_header',state:'waiting',revision:'a'.repeat(64),reportSha256:'b'.repeat(64)})});
+assert.deepEqual((await D.freshHandoff('FORMAT/parse_header')).slice(0,5),globalThis.WorkbenchConfig.commandPrefix);
+console.log('Standalone UI protocol: 7 checks passed');

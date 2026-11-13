@@ -1,0 +1,20 @@
+{
+  "surface": "Real in-app browser against isolated installed wheel on http://127.0.0.1:5198/",
+  "project": "super-ledger-demo",
+  "syntheticExample": true,
+  "checks": [
+    "Generic FORMAT/read-directory and FORMAT/read-header IDs render and select",
+    "Two original tasks, one ended with current evidence, one waiting; module evidence does not count as scene",
+    "Actual scoped report, inherited publication, exact clauses and CLI commands visible",
+    "Current scope displays correctly from the generic engine scope field",
+    "Fresh identity request renders a command with current revision and frozen report SHA even when clipboard API is unavailable",
+    "Reload with cached same snapshot restores the hash-selected task",
+    "390px viewport scrolls a suggested task to detail top11.75px; scrollWidth380 is within viewport390",
+    "After fresh audit fix, unchanged snapshot remains connected/current while auditedAt advances",
+    "No browser error/warning logs observed"
+  ],
+  "desktopScreenshot": "evidence/browser-desktop.png",
+  "mobileScreenshot": "evidence/browser-mobile.png",
+  "unityExecuted": false,
+  "oldProjectDataMigrated": false
+}

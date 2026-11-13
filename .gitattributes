@@ -1,0 +1,2 @@
+# Keep SHA-bound files byte-exact; accept CRLF from Windows writers.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

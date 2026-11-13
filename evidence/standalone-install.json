@@ -1,0 +1,75 @@
+{
+  "schema": "super-ledger/standalone-install-check@1",
+  "exitCode": 0,
+  "checks": 12,
+  "wheelSha256": "c64dd4ea6b6b3d5a6e4fcda8f1914984e0b3b457834e976c6b4fed7e60c661b4",
+  "wheelBytes": 49995,
+  "packageImportedFrom": "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\env\\Lib\\site-packages\\super_ledger\\__init__.py",
+  "isolatedUserProfile": true,
+  "sourceImportRequired": false,
+  "commands": [
+    {
+      "command": [
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\env\\Scripts\\python.exe",
+        "-I",
+        "-c",
+        "import json,super_ledger;print(json.dumps({\"file\":super_ledger.__file__}))"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "super_ledger",
+        "--project",
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\fresh-validation-20261113T205019499872Z",
+        "init",
+        "--config",
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\config.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "super_ledger",
+        "--project",
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\fresh-validation-20261113T205019499872Z",
+        "validate"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\env\\Scripts\\python.exe",
+        "-I",
+        "-m",
+        "super_ledger",
+        "--project",
+        "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\standalone-proof-20261113T204050877404Z\\fresh-validation-20261113T205019499872Z",
+        "candidates",
+        "--owner",
+        "independent-worker",
+        "--client",
+        "any-cli",
+        "--limit",
+        "3"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "demoService": {
+    "instanceId": "755547fca62b47c3acb78954f8ff3307",
+    "pid": 62168,
+    "port": 5198,
+    "projectId": "super-ledger-demo",
+    "schema": "super-ledger/health@1",
+    "startedAt": "2026-11-13T20:49:50.067476+00:00"
+  },
+  "url": "http://127.0.0.1:5198/",
+  "gameRuntimeAcceptance": false
+}

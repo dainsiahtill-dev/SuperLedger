@@ -1,0 +1,10 @@
+{
+  "schema": "super-ledger/project@1",
+  "project": {"id": "binary-format-lab", "name": "二进制格式逆向", "description": "以可复现原字节、解析器和反例推进独立逆向项目。", "runtime": {"name": "Python parser", "entrypoint": "python -m format_reader samples/header.bin", "verificationMethod": "CLI and byte-exact fixture comparison"}},
+  "phases": [{"id": "core", "title": "格式与消费者主线"}, {"id": "support", "title": "工具与证据支撑"}, {"id": "later", "title": "后置扩展"}],
+  "policy": {"coordinator": {"owner": "project-lead", "client": "codex"}, "publicPaths": ["src/", "samples/", "docs/research/"], "sceneRequired": false, "snapshotKeep": 5, "snapshotBytes": 268435456},
+  "packages": [{"id": "FORMAT", "title": "容器格式", "phase": "core", "priority": 10, "tasks": [
+    {"id": "read-header", "title": "文件头与版本", "objective": "用原始样本定位头字段，提供可执行解析器。", "acceptance": ["读取原字节并逐字段输出版本、大小和端序。", "覆盖截断、错误版本与端序反例，命令退出码和产物SHA可复核。"], "dependencies": [], "role": "implementation", "publicTargets": ["src/format_reader/header.py"], "counterexamples": ["truncated header", "unsupported version", "opposite byte order"], "consumer": "src/format_reader/header.py"},
+    {"id": "read-directory", "title": "资源索引", "objective": "在头部解析基础上恢复索引和记录边界。", "acceptance": ["真实消费者能读取并核对全部索引项。", "越界偏移、重叠记录和重复键有明确错误及反例证据。"], "dependencies": ["FORMAT/read-header"], "role": "implementation", "publicTargets": ["src/format_reader/directory.py"], "counterexamples": ["out-of-bounds offset", "overlapping records", "duplicate key"], "consumer": "src/format_reader/directory.py"}
+  ]}]
+}

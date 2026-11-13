@@ -1,0 +1,8 @@
+{
+  "command": ["rtk", "proxy", "python", "-X", "utf8", "tools/check_wheel.py"],
+  "exitCode": 1,
+  "stage": "installed wheel under isolated venv, candidates JSON decoding",
+  "reason": "python -I ignored PYTHONUTF8; Windows redirected stdout used locale encoding instead of UTF-8",
+  "correction": "CLI main explicitly reconfigures stdin/stdout/stderr to UTF-8; isolated pipe regression and wheel installation repeated",
+  "serviceStarted": false
+}

@@ -1,0 +1,9 @@
+{
+  "schema": "super-ledger/project@1",
+  "project": {"id": "runtime-reconstruction", "name": "实时系统还原", "description": "通用Unity运行时逆向配置示例；场景、MCP方法和任务均由项目指定。", "runtime": {"name": "Unity", "entrypoint": "Assets/Scenes/RuntimeLab.unity", "verificationMethod": "Unity MCP"}},
+  "phases": [{"id": "core", "title": "运行时主线"}, {"id": "support", "title": "工具支撑"}, {"id": "later", "title": "后置玩法"}],
+  "policy": {"coordinator": {"owner": "runtime-lead", "client": "codex"}, "publicPaths": ["Assets/", "Packages/", "ProjectSettings/", "docs/research/"], "sceneRequired": true, "snapshotKeep": 5, "snapshotBytes": 268435456},
+  "packages": [{"id": "RUNTIME", "title": "采样与实际场景", "phase": "core", "priority": 10, "tasks": [
+    {"id": "sample-channels", "title": "通道读取与采样", "objective": "恢复已核通道数据与采样顺序，接入指定实际场景。", "acceptance": ["通道字段和采样次序有原始证据并由实际消费者使用。", "指定场景通过Unity MCP操作、数值和截图验收，模块测试与场景验收分别登记。"], "dependencies": [], "role": "implementation", "publicTargets": ["Assets/Scripts/ChannelSampler.cs"], "counterexamples": ["empty channel", "zero-length interval", "runtime pose discontinuity"], "consumer": "Assets/Scripts/ChannelSampler.cs"}
+  ]}]
+}

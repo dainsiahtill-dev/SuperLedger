@@ -1,0 +1,12 @@
+{
+  "demo": true,
+  "syntheticFormat": true,
+  "project": "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\demo-project",
+  "stateCounts": {
+    "ended": 1,
+    "waiting": 1
+  },
+  "actualParserChecks": 2,
+  "publicationId": "f7ca21e9f82d40979eda7880e7ddced6",
+  "unityExecuted": false
+}

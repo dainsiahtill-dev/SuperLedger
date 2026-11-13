@@ -1,0 +1,81 @@
+{
+  "schema": "super-ledger/release-verification@1",
+  "exitCode": 0,
+  "commands": [
+    {
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exitCode": 0,
+      "checks": 43,
+      "seconds": 51.92311789980158
+    },
+    {
+      "command": [
+        "node",
+        "tests/test_web_protocol.mjs"
+      ],
+      "exitCode": 0,
+      "checks": 1,
+      "seconds": 0.1146890998352319
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "src/super_ledger/static/app.js"
+      ],
+      "exitCode": 0,
+      "checks": 1,
+      "seconds": 0.10623909998685122
+    },
+    {
+      "command": [
+        "node",
+        "--check",
+        "src/super_ledger/static/workbench-data.js"
+      ],
+      "exitCode": 0,
+      "checks": 1,
+      "seconds": 0.4136043000034988
+    }
+  ],
+  "inputs": {
+    "src/super_ledger/cli.py": "c3d6ab696d15dbdd785523d097259d274ac8340dd25189a7ee8403d055349ee3",
+    "src/super_ledger/config.py": "ad5f19a68451b1284d4eb16f8e39f048b106ab38073e5f6c3d640bb282b8e509",
+    "src/super_ledger/engine.py": "842892dd0aa5461c2c82530a11d5c0d89bc00c6686745f4e53a1010be89c9ee3",
+    "src/super_ledger/evidence.py": "a450f68736a11ee0ac8997b8de6cbb2456016f6c6a72b8e1f41f83f0ae3e8c78",
+    "src/super_ledger/io.py": "586158f1f417d5f24b31dcb4e851ce725a3470c556e87a97eb885e84e141ede9",
+    "src/super_ledger/projection.py": "670111136bfd59e860f398bb391d4409ecf5ac27c6d122c39d7095868d5a6707",
+    "src/super_ledger/publication.py": "4af07b9af654df1ac7c5dde0baf7f2ea794d35081365279495e8342596c6f856",
+    "src/super_ledger/server.py": "037d23202635b8aa8cb89bffaf231cbd778f596eb6942054b5e7d5d51df4ffe1",
+    "src/super_ledger/storage.py": "42952b2e318240901fcb6d2c87550c50b07b2b708aef925c2510052118fce2e3",
+    "src/super_ledger/__init__.py": "81618a400e780db9e31f635dd1315a4aacb0f70cf5160b41c56efb1881553d7e",
+    "src/super_ledger/__main__.py": "307299fda7b77d22c64cb51430ec75e5f59d78e9c948786afb3b2544fe45e4b7",
+    "src/super_ledger.egg-info/dependency_links.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/super_ledger.egg-info/entry_points.txt": "a36df1e3e9542b640a879e73ab6646b58b6aace35bb68e32a18f7fe5a02be901",
+    "src/super_ledger.egg-info/PKG-INFO": "46ab31879b14a8939583d6e55792240923e34c4c8c053eb8156e9d019195286a",
+    "src/super_ledger.egg-info/SOURCES.txt": "ed78a071430991d9b466da469be379eebac231ea87284eaff17b7bc4182c1f32",
+    "src/super_ledger.egg-info/top_level.txt": "153054dedabb9cc964dc66ad54d000a42ee4dfb7506e568647669bf4871ebfca",
+    "src/super_ledger/static/app.css": "f95e960bd5eaf739fe7a488674165129aa3cd3bbec1ba71e49c415354ee6d1e7",
+    "src/super_ledger/static/app.js": "a5df53c8cfccbed4be374844da8debf433796e6da70c1db624205772649e51e8",
+    "src/super_ledger/static/index.html": "8d3897fc5757a63e2ed0831c64a3709ace5ca9dd768f96ce4183c544c34eec6a",
+    "src/super_ledger/static/README.md": "96bdae11863b6a7ffb4d1573c9fd8dc13671382b5518efb402609ec5d6b57710",
+    "src/super_ledger/static/workbench-data.js": "0872f333cea39199d65c2e5e3c0550fef1321bd5197ae00115c2539d4dd43cc1",
+    "tests/test_acceptance.py": "f75abc77c643021a7dd1a0be5d18d257d2af6f84bae13aa939ba808f2422aaec",
+    "tests/test_core.py": "61bb9334587f46efba0aaec06e08159043afb9288b1ba5d12af0b157d2920ac7",
+    "tests/test_publication.py": "0bff97b2e85ee5f60f2199290ff91e32b69f6b02a793655191784fe483ab2ada",
+    "tests/test_runcheck.py": "1977d0adfa1c320afb809aac4496e2b086efa5de0f4ed0d049479bb47b8e567d",
+    "tests/test_web.py": "fdf29117b81e06a6984e478f8c8c45587406dcdc52244f88a5ea687ea6963ec4",
+    "tests/test_web_protocol.mjs": "4c7016bd0f12f09f21aff651555763f8c01db96a0b28edc585fb5d3d20425dc3",
+    "examples/binary-format.json": "768fdfc6f202bc1019e68799dc95cd69062fa2e3a066f4380b890ec4100fb067",
+    "examples/unity-runtime.json": "7db05ab7bad848dcea59932356c638fb0fa5909572ceb81c6483b9dd8d161c0f"
+  },
+  "receiptDirectory": "evidence/verification-20261113T203823359607Z"
+}

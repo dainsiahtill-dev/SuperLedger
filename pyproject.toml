@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "super-ledger"
+version = "0.1.0"
+description = "Evidence-gated task handoff and review for reverse-engineering projects"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+classifiers = ["Programming Language :: Python :: 3", "Operating System :: OS Independent"]
+
+[project.scripts]
+super-ledger = "super_ledger.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+super_ledger = ["static/*.html", "static/*.js", "static/*.css", "static/*.md"]

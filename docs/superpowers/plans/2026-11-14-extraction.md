@@ -44,5 +44,4 @@ Create pyproject.toml, __main__.py, cli.py, publication.py, generic prompt and p
 
 Mark actual completed steps, retain receipts/screenshots under evidence/, state unavailable capabilities precisely, commit exact changes and report project location/commands/proof/remaining limits.
 
-
 Completed: Tasks1–5 implemented, independently reviewed, and verified. See evidence/DELIVERY.md and release-verification.json. Git publication is tracked by the actual repository commit/remote, not by invented test progress.

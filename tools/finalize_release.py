@@ -25,7 +25,8 @@ Ready-to-install artifact: releases/super_ledger-0.1.0-py3-none-any.whl. Demo:ht
 '''
 (ROOT/'evidence/DELIVERY.md').write_text(report,encoding='utf-8')
 plan=ROOT/'docs/superpowers/plans/2026-11-14-extraction.md'
-plan.write_text(plan.read_text(encoding='utf-8')+'\n\nCompleted: Tasks1–5 implemented, independently reviewed, and verified. See evidence/DELIVERY.md and release-verification.json. Git publication is tracked by the actual repository commit/remote, not by invented test progress.\n',encoding='utf-8')
+note='\n\nCompleted: Tasks1–5 implemented, independently reviewed, and verified. See evidence/DELIVERY.md and release-verification.json. Git publication is tracked by the actual repository commit/remote, not by invented test progress.\n'
+plan.write_text(plan.read_text(encoding='utf-8').replace(note,'').rstrip()+note,encoding='utf-8')
 files=[receipt_path,ROOT/'evidence/standalone-install.json',ROOT/'evidence/browser-acceptance.json',ROOT/'evidence/browser-desktop.png',ROOT/'evidence/browser-mobile.png',ROOT/'releases/super_ledger-0.1.0-py3-none-any.whl']
 proof={'schema':'super-ledger/release@1','version':'0.1.0','exitCode':0,'pythonTests':46,'nodeProtocolAssertions':7,'standaloneInstallation':True,'browserAccepted':True,'sourceInputs':receipt['inputs'],'evidence':{p.relative_to(ROOT).as_posix():sha(p) for p in files},'runtimeAcceptance':'synthetic parser example only; no game/Unity acceptance'}
 (ROOT/'evidence/release-verification.json').write_text(json.dumps(proof,ensure_ascii=False,indent=2),encoding='utf-8')

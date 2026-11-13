@@ -35,6 +35,7 @@ class Ledger:
     def _check_config(self):
         if hash_file(self.root/'super-ledger.json')!=self._config_hash:raise ValueError('Project contracts/policy changed; reload the ledger')
     def snapshot(self):
+        if safe_path(self.root,'.super-ledger/pending-catalog.json').exists():raise ValueError('Pending catalog transaction; run catalog recover')
         self._check_config();data=self.storage.load()
         if data.get('projectId')!=self.config['project']['id'] or set(data.get('slots',{}))!=set(self.catalog) or data.get('configSha256')!=self._policy_hash:raise ValueError('Project configuration contract/registry mismatch; explicit migration is required')
         return data
@@ -70,6 +71,7 @@ class Ledger:
             self._commit(data,slot)
     def _check_pending(self,allow_pending=False):
         self.storage.validate_paths()
+        if safe_path(self.root,'.super-ledger/pending-catalog.json').exists():raise ValueError('Pending catalog transaction; run catalog recover')
         if not allow_pending and safe_path(self.root,'.super-ledger/pending-publication.json').exists():raise ValueError('Recover pending controlled publication before any task mutation')
     def identity(self,package,task):
         key=self._key(package,task);data=self.snapshot();slot=self._slot(data,key);report=slot.get('report') or {};error=''
@@ -79,6 +81,7 @@ class Ledger:
             except (OSError,ValueError,KeyError):error='Current report path is invalid'
         return {'schema':'super-ledger/identity@1','readOnly':True,'admissionEvaluated':False,'writeAuthorized':False,'projectId':data['projectId'],'packageId':package,'taskId':task,'state':slot['state'],'worker':copy.deepcopy(slot.get('worker')),'attempt':slot.get('attempt'),'generation':slot.get('generation'),'scope':slot.get('scope'),'revision':stable_hash(slot),'contractSha256':slot['contractSha256'],'reportPath':report.get('path',''),'reportSha256':report.get('sha256',''),'reportError':error,'nextAction':slot.get('nextAction',''),'blocker':slot.get('blocker','')}
     def candidates(self,owner,client,phase='',limit=3,offset=0):
+        if safe_path(self.root,'.super-ledger/pending-catalog.json').exists():raise ValueError('Pending catalog transaction; run catalog recover')
         self._worker(owner,client)
         if type(limit) is not int or not 1<=limit<=50 or type(offset) is not int or offset<0:raise ValueError('Invalid candidate pagination')
         if phase and phase not in {p['id'] for p in self.config['phases']}:raise ValueError('Unknown phase')

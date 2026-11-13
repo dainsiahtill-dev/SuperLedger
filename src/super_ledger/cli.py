@@ -15,7 +15,12 @@ def parser() -> argparse.ArgumentParser:
     p.add_argument("--project", type=Path, default=Path.cwd(), help="Project containing super-ledger.json")
     sub = p.add_subparsers(dest="action", required=True)
     init = sub.add_parser("init", help="Initialize a new independent project without overwriting a ledger")
-    init.add_argument("--config", type=Path, required=True)
+    init.add_argument("--config", type=Path)
+    init.add_argument("--id")
+    init.add_argument("--name")
+    init.add_argument("--owner")
+    init.add_argument("--client")
+    init.add_argument("--template",choices=['generic','binary','unity'],default='generic')
     init.add_argument("--json", action="store_true")
     candidates = sub.add_parser("candidates", help="Read bounded suggestions; this grants no write permission")
     candidates.add_argument("--owner", required=True)
@@ -66,6 +71,8 @@ def parser() -> argparse.ArgumentParser:
     run.add_argument("--grant-stdin", action="store_true", required=True)
     run.add_argument("--expected-revision", required=True)
     run.add_argument("command", nargs=argparse.REMAINDER)
+    from .catalog_cli import add_catalog_commands
+    add_catalog_commands(sub)
     return p
 
 
@@ -119,8 +126,18 @@ def execute(args: argparse.Namespace):
     root = args.project.resolve()
     if args.action == "init":
         from .config import initialize_project
-        initialize_project(root, json.loads(args.config.read_bytes()))
+        from .catalog import bootstrap
+        if args.config:
+            if any((args.id,args.name,args.owner,args.client)) or args.template!='generic':raise ValueError('Use either --config or explicit empty-project fields')
+            config=json.loads(args.config.read_bytes())
+        else:
+            if not all((args.id,args.name,args.owner,args.client)):raise ValueError('Empty project needs --id --name --owner --client')
+            config=bootstrap(args.id,args.name,args.owner,args.client,args.template)
+        initialize_project(root, config)
         return {"initialized": True, "project": str(root)}
+    if args.action in {'project','package','task','catalog','doctor'}:
+        from .catalog_cli import execute_catalog
+        return execute_catalog(root,args)
     ledger = Ledger(root)
     if args.action == "serve":
         from .server import serve
@@ -178,6 +195,7 @@ def main(argv=None) -> int:
         result = execute(args)
         if result is not None:
             print(json.dumps(result, ensure_ascii=False, indent=2))
+        if args.action == 'doctor' and not result.get('ready'):return 1
         return int(result.get("exitCode", 0)) if args.action == "run-check" and isinstance(result, dict) else 0
     except (ValueError, OSError, KeyError, TimeoutError) as error:
         print(json.dumps({"error": str(error)}, ensure_ascii=False), file=sys.stderr)

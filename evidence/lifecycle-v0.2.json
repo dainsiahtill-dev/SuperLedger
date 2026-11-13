@@ -1,0 +1,31 @@
+{
+  "schema": "super-ledger/lifecycle-smoke@1",
+  "python": "C:\\Python314\\python.exe",
+  "site": "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\lifecycle-20261113T212120462537Z\\site",
+  "project": "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\lifecycle-20261113T212120462537Z\\project",
+  "base": "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\lifecycle-20261113T212120462537Z",
+  "launcher": [
+    "C:\\Python314\\python.exe",
+    "-I",
+    "-c",
+    "import sys,runpy;sys.path.insert(0,sys.argv.pop(1));runpy.run_module(\"super_ledger\",run_name=\"__main__\")",
+    "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\lifecycle-20261113T212120462537Z\\site",
+    "--project",
+    "C:\\Users\\dains\\Documents\\GitLab\\super-ledger\\build\\lifecycle-20261113T212120462537Z\\project"
+  ],
+  "health": {
+    "schema": "super-ledger/health@1",
+    "pid": 73928,
+    "instanceId": "91c11402d37e4c899c1d16d0953898c7",
+    "projectId": "first-project-demo",
+    "startedAt": "2026-11-13T21:21:24.248424+00:00",
+    "port": 53477
+  },
+  "url": "http://127.0.0.1:53477/",
+  "wheelSha256": "f3e492757da365e359264bb4e433d731e98ccf19814f2a78afe25a9ccd5e20e0",
+  "initialTaskCount": 0,
+  "populatedTaskCount": 1,
+  "exitCode": 0,
+  "checks": 8,
+  "finalInstalledBytesVerified": true
+}

@@ -6,7 +6,7 @@ import re
 from .io import atomic, canonical, digest, stable_hash, safe_path, safe_root
 
 BLOB='$ledgerBlob'
-EXTERNAL={'history','integrations','verifications'}
+EXTERNAL={'history','integrations','verifications','catalogHistory'}
 
 
 class RegistryStore:

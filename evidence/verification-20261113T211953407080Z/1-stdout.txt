@@ -1,0 +1,1 @@
+Standalone UI protocol: 7 checks passed

@@ -1,0 +1,10 @@
+{
+  "id": "read-header",
+  "title": "读取首个原始样本头部",
+  "objective": "从实际样本核对头字段并实现消费者；未确认规则继续标明缺口。",
+  "acceptance": ["原始样本与每个已确认字段的来源可复核。", "真实消费者覆盖正常输入与截断反例，并保留命令、退出码和SHA。"],
+  "dependencies": [],
+  "publicTargets": ["src/header.py"],
+  "consumer": "src/header.py",
+  "counterexamples": ["截断输入", "未识别的头字段"]
+}

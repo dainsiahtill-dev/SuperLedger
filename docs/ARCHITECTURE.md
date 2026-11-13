@@ -8,7 +8,9 @@ Super Ledger将工程定义、权威状态、不可变证据和只读页面分�
 
 `project.runtime`提供运行时名称、入口和 `verificationMethod`。`policy.coordinator`指定行政恢复执行者；`publicPaths`是可发布路径前缀；每条任务的 `publicTargets`进一步限定它可发布的准确文件。`sceneRequired`决定结束是否必须含真实场景证据。`snapshotKeep`/`snapshotBytes`控制派生缓存。
 
-初始化持久绑定完整规范化配置SHA。修改协调者、运行时、验收句或场景策略后，即使重开CLI也会拒绝现有台账；v0.1不提供静默修改合同或历史转换。需要新增任务时请先准备完整项目配置再初始化；对已有台账做合同迁移属于需单独实现的显式管理能力。
+初始化持久绑定完整规范化配置SHA。v0.2允许空项目和空包，通过Catalog模块统一创建工作包、添加任务、修改未领取草稿和拆分。所有变更核对原协调者、整项目CAS及原因，记录catalogHistory；已有执行槽位保持原字节语义。运行时、协调者和场景策略仍禁止借目录变更修改，已领取合同也保持冻结。
+
+Catalog先冻结配置与逻辑registry的前后版本，再落pending journal，最后提交两个文件。中断后所有正式任务写入都会拒绝，catalog recover只接受已登记的两种状态，保留外部第三种内容。初始化也使用该协议。只读服务在刷新时重新加载并校验正式目录，新增包与任务无需重启服务。命令与首次建账流程见FIRST-PROJECT.md。
 
 ## 执行权
 

@@ -135,7 +135,8 @@ function renderQueue() {
     const name=el('span',{},[el('span',{class:'identity'},[`${r.taskId} · ${r.packageId}${plan?' · '+(laneLabels[plan.lane] || plan.lane):''}`]),el('span',{class:'name'},[r.title]),plan?el('span',{class:'next-deliverable'},[plan.nextDeliverable]):null,el('span',{class:'meta'},[`${r.worker?.owner || '无执行者'}${r.worker?.client?' · '+r.worker.client:''} · ${age(r.updated)}`]),chips.length?el('span',{class:'chips'},chips):null]);
     return taskButton(key,r,name);
   });
-  $('task-list').replaceChildren(...(nodes.length?nodes:[el('p',{class:'empty'},['当前筛选没有任务。可清空搜索或切换“全部任务”。'])]));
+  const empty=model.rows.length?el('p',{class:'empty'},['当前筛选没有任务。可清空搜索或切换“全部任务”。']):el('div',{class:'empty'},[el('p',{},[model.summary.packages.length?'工作包已创建，下一步用 task create 添加第一条任务。':'项目已创建，下一步用 package create 创建第一个工作包。']),el('p',{},['先运行 project show 获取最新revision；目录变更需配置的协调者和原因。']),el('pre',{},[[...C.commandPrefix,'project','show'].map(shellQuote).join(' ')]),el('a',{href:'/README.md',target:'_blank',rel:'noopener'},['查看从零建账命令'])]);
+  $('task-list').replaceChildren(...(nodes.length?nodes:[empty]));
   $('pagination').replaceChildren(button('上一页',()=>{state.page--;renderQueue();},{disabled:state.page===0?'':null}),el('span',{},[`${state.page+1} / ${pages} 页 · 每页 25 条`]),button('下一页',()=>{state.page++;renderQueue();},{disabled:state.page>=pages-1?'':null}));
 }
 function taskButton(key,r,name) {

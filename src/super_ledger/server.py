@@ -18,6 +18,7 @@ class WorkbenchServer(ThreadingHTTPServer):
     daemon_threads=True;allow_reuse_address=True
     def __init__(self,root,port,host='127.0.0.1',ledger=None):
         if host not in ('127.0.0.1','localhost','::1'):raise ValueError('Read-only ledger service is loopback-only')
+        self.reload_ledger=ledger is None
         if ledger is None:
             from .engine import Ledger
             ledger=Ledger(Path(root))
@@ -28,6 +29,10 @@ class WorkbenchServer(ThreadingHTTPServer):
         self.refresh()
     def refresh(self):
         with self.refresh_lock:
+            # Each CLI catalog transaction can add packages/tasks. A new Ledger
+            # still validates the persistent config/registry binding and journal.
+            from .engine import Ledger
+            if self.reload_ledger:self.ledger=Ledger(self.root)
             bundle=build(self.ledger)
             observed=sha(canonical(bundle))
             if self.last_revision!=observed or not self.store.manifest_path.exists():

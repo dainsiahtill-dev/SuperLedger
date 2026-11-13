@@ -2,6 +2,8 @@
 
 将实际工程路径、owner与client替换后使用；不要照填OWNER或冒充协调者。
 
+首次建账由实际协调者按FIRST-PROJECT.md执行：init→project show→package create→task create→doctor。worker发现空目录或缺少任务时应交付明确建账请求，不能冒用协调者修改既有责任。新增与拆分使用正式目录命令；所有旧报告和已领取合同保留。
+
 ```text
 在 PROJECT 推进已配置的逆向主线。读AGENTS.md、super-ledger.json和台账；尊重暂停指令，不自行启动其他模型客户端。运行时验收按project.runtime使用真实接口/MCP，静态或编译不能冒充场景。
 先执行 python -m super_ledger --project PROJECT candidates --owner 实际唯一执行者 --client 实际客户端 --phase core --limit 3。候选只读；优先复用waiting成果、已发布实现和现有证据，每轮只补一个明确剩余事实或消费者反例，不重写整条。

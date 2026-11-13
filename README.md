@@ -6,6 +6,8 @@ Python 3.11+，运行时只依赖标准库。项目名称、任务 ID、优先�
 
 ## 安装与启动
 
+v0.2已支持先创建空项目，再建立工作包和子任务。完整逐条命令见 [从零建账](docs/FIRST-PROJECT.md)。`project show`给出整项目revision；`package create/update`、`task create/update/split`与`catalog apply --dry-run`共用有历史记录及中断恢复的目录事务。
+
 ```powershell
 rtk proxy python -m pip install --no-build-isolation -e .
 rtk proxy super-ledger --project C:/Projects/MyReverseProject init --config examples/binary-format.json

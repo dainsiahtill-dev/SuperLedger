@@ -47,7 +47,7 @@ def validate_config(value):
     if type(policy['sceneRequired']) is not bool or type(policy['snapshotKeep']) is not int or not 1<=policy['snapshotKeep']<=100 or type(policy['snapshotBytes']) is not int or policy['snapshotBytes']<1:raise ValueError('Invalid scene/snapshot policy')
     if 'requirePublication' in policy and type(policy['requirePublication']) is not bool:raise ValueError('requirePublication must be boolean')
     packages=data.get('packages')
-    if not isinstance(packages,list) or not packages:raise ValueError('At least one package is required')
+    if not isinstance(packages,list):raise ValueError('Packages must be a list')
     catalog={};package_ids=set()
     for package in packages:
         pid=identifier(package.get('id'))
@@ -57,7 +57,7 @@ def validate_config(value):
         package.setdefault('priority',0)
         if type(package['priority']) is not int:raise ValueError('Priority must be an integer')
         tasks=package.get('tasks')
-        if not isinstance(tasks,list) or not tasks:raise ValueError('Package needs tasks')
+        if not isinstance(tasks,list):raise ValueError('Package tasks must be a list')
         local=set()
         for task in tasks:
             if not isinstance(task,dict):raise ValueError('Task must be an object')
@@ -95,10 +95,5 @@ def catalog_for(config):
 
 
 def initialize_project(root,config_dict):
-    root=safe_root(root);root.mkdir(parents=True,exist_ok=True);data=validate_config(config_dict)
-    from .storage import RegistryStore
-    with locked(safe_path(root,'.super-ledger/init.lock')):
-        if (root/CONFIG).exists() or (root/'.super-ledger/registry.json').exists():raise ValueError('Project is already initialized; existing contracts are preserved')
-        slots={key:{'state':'idle','worker':None,'attempt':'','generation':0,'scope':'','updated':'','sequence':0,'contractSha256':contract_hash(task),'note':'','nextAction':'','blocker':'','deliveryStatus':'','history':[],'integrations':[],'verifications':[]} for key,task in catalog_for(data).items()}
-        atomic(safe_path(root,CONFIG),canonical(data)+b'\n')
-        RegistryStore(root).commit({'schema':'super-ledger/registry@1','projectId':data['project']['id'],'configSha256':stable_hash(data),'version':0,'slots':slots})
+    from .catalog import initialize_catalog
+    initialize_catalog(root,validate_config(config_dict))
